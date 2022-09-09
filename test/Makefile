@@ -15,9 +15,8 @@ dicts = advancedcppDict.so \
         templatesDict.so
 
 all : $(dicts)
-alias python='python3'
 genreflex_flags := $(shell genreflex --cppflags)
-cppflags=$(shell cling-config --cppflags) $(genreflex_flags) -O3 -fPIC -I$(shell python -c 'import sysconfig as sc; print(sc.get_config_var("INCLUDEPY"))') -Wno-register
+cppflags=$(shell cling-config --cppflags) $(genreflex_flags) -O3 -fPIC -I$(shell python3 -c 'import sysconfig as sc; print(sc.get_config_var("INCLUDEPY"))') -Wno-register
 
 PLATFORM := $(shell uname -s)
 ifeq ($(PLATFORM),Darwin)
