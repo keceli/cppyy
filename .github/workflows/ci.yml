@@ -38,7 +38,7 @@ jobs:
       run: |
         set -ex
         apt-get update -y
-        DEBIAN_FRONTEND=noninteractive TZ=America/Los_Angeles apt-get install -y software-properties-common wget python3-pip make apt-transport-https
+        DEBIAN_FRONTEND=noninteractive TZ=America/Los_Angeles apt-get install -y software-properties-common wget python3-pip python-is-python3 make apt-transport-https
 
         # Add apt repositories for older Ubuntu
         . /etc/os-release
