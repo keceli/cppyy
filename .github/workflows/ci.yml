@@ -19,6 +19,7 @@ jobs:
             EXTRA_APT_PACKAGES: 'clang-12'
             CONTAINER: ubuntu:20.04
             NAME: ubuntu-20.04-clang-12-cpp17
+            CPPYY_VERSION: '2.4.0'
     name: ${{ matrix.name }}
 
     steps:
