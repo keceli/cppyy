@@ -49,10 +49,12 @@ jobs:
         fi
 
         apt-get update -y
-
+        
+       
         # Install apt packages
+        export CPPYY_VERSION=2.4.0
         apt-get install libboost-serialization-dev libboost-dev ${EXTRA_APT_PACKAGES} -y
-        pip3 install numpy pytest cppyy
+        pip3 install numpy pytest cppyy==${CPPYY_VERSION}
 
         # Set compiler and env variables
         export CXX=${COMPILER}
@@ -84,6 +86,7 @@ jobs:
         popd
 
         # Build cppyy tests
+        git checkout cppyy-${CPPYY_VERSION}
         cd test
         make all
         python3 -m pytest -sv
