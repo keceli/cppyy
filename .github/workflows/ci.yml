@@ -13,13 +13,13 @@ jobs:
             EXTRA_APT_PACKAGES: 'g++-10'
             CONTAINER: ubuntu:20.04
             NAME: ubuntu-20.04-g++10
-            CPPYY_VERSION: '2.4.0'
+            CPPYY_VERSION: 'cppyy-2.4.0'
          
           - COMPILER: 'clang++-12'
             EXTRA_APT_PACKAGES: 'clang-12'
             CONTAINER: ubuntu:20.04
             NAME: ubuntu-20.04-clang-12-cpp17
-            CPPYY_VERSION: '2.4.0'
+            CPPYY_VERSION: 'cppyy-2.4.0'
     name: ${{ matrix.name }}
 
     steps:
@@ -57,7 +57,7 @@ jobs:
        
         # Install apt packages
         apt-get install libboost-serialization-dev libboost-dev ${EXTRA_APT_PACKAGES} -y
-        pip3 install numpy pytest cppyy==${{ matrix.CPPYY_VERSION }}
+        pip3 install numpy pytest cppyy
 
         # Set compiler and env variables
         export CXX=${COMPILER}
