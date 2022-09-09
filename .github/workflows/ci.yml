@@ -13,6 +13,7 @@ jobs:
             EXTRA_APT_PACKAGES: 'g++-10'
             CONTAINER: ubuntu:20.04
             NAME: ubuntu-20.04-g++10
+            CPPYY_VERSION: '2.4.0'
          
           - COMPILER: 'clang++-12'
             EXTRA_APT_PACKAGES: 'clang-12'
@@ -22,7 +23,9 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
+      with:
+	ref: $${matric.CPPYY_VERSION}}
 
     - name: install deps and test
       shell: bash
@@ -52,9 +55,8 @@ jobs:
         
        
         # Install apt packages
-        export CPPYY_VERSION=2.4.0
         apt-get install libboost-serialization-dev libboost-dev ${EXTRA_APT_PACKAGES} -y
-        pip3 install numpy pytest cppyy==${CPPYY_VERSION}
+        pip3 install numpy pytest cppyy==${{ matrix.CPPYY_VERSION }}
 
         # Set compiler and env variables
         export CXX=${COMPILER}
@@ -86,7 +88,6 @@ jobs:
         popd
 
         # Build cppyy tests
-        git checkout cppyy-${CPPYY_VERSION}
         cd test
         make all
         python3 -m pytest -sv
